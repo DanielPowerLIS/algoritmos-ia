@@ -1,17 +1,17 @@
 class Node:
-    def _init_(self, value):
+    def __init__(self, value):
         self.value = value
-        self.neighbors =[]
+        self.neighbors = {}
 
-    def add_neighbor(self, node):
+    def add_neighbor(self, node, cost=1):
         #add a new neighboor if not already in the list
         if node not in self.neighbors:
-            self.neighbors.append(node)
+            self.neighbors[node] = cost
 
-    def remove_nieghbor(self, node):
+    def remove_neighbor(self, node):
         #remove a neighbor if it is in the list
         if node in self.neighbors:
-            self.neighbors.remove(node)
+            del self.neighbors[node]
 
     def has_neighbor(self, node):
         #check if a node is a neigbor
@@ -23,4 +23,4 @@ class Node:
     def _repr_(self):
         return f"Node({self.value})"
     
-    
+
