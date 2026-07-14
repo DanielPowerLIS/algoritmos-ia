@@ -14,16 +14,15 @@ class Graph:
         #remove a node y all its connections if it exists
         if value not in self.nodes:
             return
-        node_to_remove = self.nodes[value]
         
         #remove the references to this node
         for current_node in self.nodes.values():
-            current_node.remove_neighbor(node_to_remove)
+            current_node.remove_neighbor(value)
 
         #remove the node from the graph
         del self.nodes[value]
 
-    def add_edge(self, origin, destination):
+    def add_edge(self, origin, destination, cost=1):
         #add a edge diriged from origin to destination if both nodes exist
         if origin not in self.nodes:
             raise ValueError(f"Node {origin} does not exist in the graph.")
@@ -33,19 +32,17 @@ class Graph:
             raise ValueError(f"Node {destination} does not exist in the graph.")
             return
         
-        self.nodes[origin].add_neighbor(self.nodes[destination])
+        self.nodes[origin].add_neighbor(destination, cost)
 
     def remove_edge(self, origin, destination):
         #remove a edge from origin to destination
         if origin not in self.nodes:
             raise ValueError(f"Node {origin} does not exist in the graph.")
-            return
         
         if destination not in self.nodes:
             raise ValueError(f"Node {destination} does not exist in the graph.")
-            return
         
-        self.nodes[origin].remove_neighbor(self.nodes[destination])
+        self.nodes[origin].remove_neighbor(destination)
 
     def get_node(self, value):
         #return the node if it exists, otherwise return None
@@ -62,15 +59,13 @@ class Graph:
         #clear the graph
         self.nodes.clear()
 
-    def _str_(self):
+    def __str__(self):
         result = ""
 
         for node in self.nodes.values():
-            neighbors = [
-                neighbor.value for neighbor in node.neighbors
-            ]
+            result += f"Node {node.value}: Neighbors -> {node.neighbors}\n"
 
-        result += f"Node {node.value}: Neighbors -> {neighbors}\n"
+        
 
         return result
     
