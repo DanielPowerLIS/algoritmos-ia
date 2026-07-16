@@ -1,4 +1,4 @@
-from queue import Queue
+from structures.queue import Queue
 
 def breadth_first_search(graph, start_node):
     queue = Queue()
@@ -18,5 +18,3 @@ def breadth_first_search(graph, start_node):
                 visited.add(neighbor)   
 
     return traversal
-
-
