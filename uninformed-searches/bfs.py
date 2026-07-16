@@ -1,4 +1,4 @@
-from structures.queue import Queue
+from queue import Queue
 
 def breadth_first_search(graph, start_node):
     queue = Queue()
